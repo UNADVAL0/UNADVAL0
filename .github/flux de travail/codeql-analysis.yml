@@ -1,70 +1,36 @@
-# For most projects, this workflow file will not need changing; you simply need
-# to commit it to your repository.
-#
-# You may wish to alter this file to override the set of languages analyzed,
-# or to provide custom queries or build logic.
-#
-# ******** NOTE ********
-# We have attempted to detect the languages in your repository. Please check
-# the `language` matrix defined below to confirm you have the correct set of
-# supported CodeQL languages.
-#
-name: "CodeQL"
-
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    # The branches below must be a subset of the branches above
-    branches: [ main ]
-  schedule:
-    - cron: '27 7 * * 2'
-
-jobs:
-  analyze:
-    name: Analyze
-    runs-on: ubuntu-latest
-    permissions:
-      actions: read
-      contents: read
-      security-events: write
-
-    strategy:
-      fail-fast: false
-      matrix:
-        language: [  ]
-        # CodeQL supports [ 'cpp', 'csharp', 'go', 'java', 'javascript', 'python', 'ruby' ]
-        # Learn more about CodeQL language support at https://git.io/codeql-language-support
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    # Initializes the CodeQL tools for scanning.
-    - name: Initialize CodeQL
-      uses: github/codeql-action/init@v1
-      with:
-        languages: ${{ matrix.language }}
-        # If you wish to specify custom queries, you can do so here or in a config file.
-        # By default, queries listed here will override any specified in a config file.
-        # Prefix the list here with "+" to use these queries and those in the config file.
-        # queries: ./path/to/local/query, your-org/your-repo/queries@main
-
-    # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
-    # If this step fails, then you should remove it and run the build manually (see below)
-    - name: Autobuild
-      uses: github/codeql-action/autobuild@v1
-
-    # ℹ️ Command-line programs to run using the OS shell.
-    # 📚 https://git.io/JvXDl
-
-    # ✏️ If the Autobuild fails above, remove it and uncomment the following three lines
-    #    and modify them (or add more) to build your code if your project
-    #    uses a compiled language
-
-    #- run: |
-    #   make bootstrap
-    #   make release
-
-    - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v1
+pragma solidité ^0.6.12 ;
+ // Identifiant de licence SPDX :
+ sans licence interface IERC20 {
+ la fonction totalSupply() renvoie la vue externe (uint256); 
+/** * @dev Renvoie le nombre de jetons détenus par `account`.
+ */ la fonction balanceOf (compte d'adresse) renvoie la vue externe (uint256); 
+/** * @dev Déplace les jetons `amount` du compte de l'appelant vers `recipient`. 
+* * Renvoie une valeur booléenne indiquant si l'opération a réussi. 
+* * Émet un événement {Transfert}. 
+*/ transfert de fonction (adresse destinataire, montant uint256) retours externes (bool); 
+/** * @dev Renvoie le nombre de jetons restants que `spender` sera * autorisé à effectuer des dépenses au nom du "propriétaire" via {transferFrom}. C'est * zéro par défaut.
+ * * Cette valeur change lorsque {approve} ou {transferFrom} sont appelés. 
+*/ allocation de fonction (propriétaire d'adresse, dépense d'adresse) retours de vue externe (uint256); 
+/** * @dev Définit `amount` comme l'allocation de `spender` sur les jetons de l'appelant. 
+* * Renvoie une valeur booléenne indiquant si l'opération a réussi. 
+* * IMPORTANT : Attention, changer une indemnité avec cette méthode comporte le risque 
+ * que quelqu'un peut utiliser à la fois l'ancienne et la nouvelle allocation par un malheureux
+ * commande de transactions. Une solution possible pour atténuer cette course
+ * la condition est de réduire d'abord l'allocation du dépensier à 0 et de définir le 
+ * valeur souhaitée après :
+ * https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729 
+* * Émet un événement {Approbation}. 
+*/ fonction approuver (dépenseur d'adresse, montant uint256) retours externes (bool);
+ /** * @dev Déplace les jetons `amount` de `sender` à `recipient` en utilisant le 
+ * mécanisme d'allocation. `montant` est alors déduit du montant de l'appelant 
+* allocation. 
+* * Renvoie une valeur booléenne indiquant si l'opération a réussi. 
+* * Émet un événement {Transfert}. 
+*/ fonction transferFrom (expéditeur de l'adresse, destinataire de l'adresse, montant uint256) retours externes (bool);
+ /** * @dev Émis lorsque les jetons `value` sont déplacés d'un compte (`from`) à * un autre (`à`). 
+* * Notez que `value` peut être zéro. 
+*/ transfert d'événement (adresse indexée à partir de, adresse indexée à, valeur uint256); 
+/** * @dev Émis lorsque l'allocation d'un "dépensier" pour un "propriétaire" est définie par * un appel à {approuver}. `value` est la nouvelle allocation. 
+*/ approbation d'événement (propriétaire indexé d'adresse, dépense indexée d'adresse, valeur uint256); 
+} /** * @dev Wrappers sur les opérations arithmétiques de Solidity avec un débordement supplémentaire * chèques. 
+* * Les opérations arithmétiques dans Solidity s'enroulent sur le débordement. Cela peut facilement résulter * dans les bogues, car les programmeurs supposent généralement qu'un débordement provoque une * erreur, qui est le comportement standard dans les langages de programmation de haut niveau. * `SafeMath` restaure cette intuition en annulant la transaction lorsqu'un * débordements d'opération. * * L'utilisation de cette bibliothèque au lieu des opérations non cochées élimine tout un * classe de bogues, il est donc recommandé de toujours l'utiliser. */ bibliothèque SafeMath { /** * @dev Renvoie l'addition de deux entiers non signés, en inversant * débordement. * * Contrepartie de l'opérateur `+` de Solidity. * * Exigences: * * - L'addition ne peut pas déborder. */ fonction add(uint256 a, uint256 b) retour pur interne (uint256) { uint256 c = a + b ; require(c >= a, "SafeMath : dépassement d'addition"); retour c; } /** * @dev Renvoie la soustraction de deux entiers non signés, en inversant * débordement (lorsque le résultat est négatif). * * Contrepartie de l'opérateur `-` de Solidity. * * Exigences: * * - La soustraction ne peut pas déborder. */ fonction sub(uint256 a, uint256 b) retour pur interne (uint256) { return sub(a, b, "SafeMath : débordement de soustraction"); } /** * @dev Renvoie la soustraction de deux entiers non signés, en inversant le message personnalisé sur * débordement (lorsque le résultat est négatif). * * Contrepartie de l'opérateur `-` de Solidity. * * Exigences: * * - La soustraction ne peut pas déborder. */ function sub(uint256 a, uint256 b, string memory errorMessage) retour pur interne (uint256) { nécessite(b <= a, message d'erreur); uint256 c = a - b ; retour c; } /** * @dev Renvoie la multiplication de deux entiers non signés, en inversant * débordement. * * Contrepartie de l'opérateur `*` de Solidity. * * Exigences: * * - La multiplication ne peut pas déborder. */ fonction mul(uint256 a, uint256 b) retour pur interne (uint256) { // Optimisation du gaz : c'est moins cher que d'exiger que "a" ne soit pas nul, mais le // l'avantage est perdu si 'b' est également testé. // Voir : https://github.com/OpenZeppelin/openzeppelin-contracts/pull/522 si (un == 0) { renvoie 0 ; } uint256 c = un * b; require(c / a == b, "SafeMath : multiplication overflow"); retour c; } /** * @dev Renvoie la division entière de deux entiers non signés. Revient sur * division par zéro. Le résultat est arrondi vers zéro. * * Contrepartie de l'opérateur `/` de Solidity. Remarque : cette fonction utilise un * opcode `revert` (qui laisse le gaz restant intact) tandis que Solidity * utilise un opcode invalide pour revenir en arrière (consommant tout le gaz restant). * * Exigences: * * - Le diviseur ne peut pas être zéro. */ fonction div(uint256 a, uint256 b) retour pur interne (uint256) { return div(a, b, "SafeMath : division par zéro"); } /** * @dev Renvoie la division entière de deux entiers non signés. Revient avec un message personnalisé sur * division par zéro. Le résultat est arrondi vers zéro. * * Contrepartie de l'opérateur `/` de Solidity. Remarque : cette fonction utilise un * opcode `revert` (qui laisse le gaz restant intact) tandis que Solidity * utilise un opcode invalide pour revenir en arrière (consommant tout le gaz restant). * * Exigences: * * - Le diviseur ne peut pas être zéro. */ function div(uint256 a, uint256 b, string memory errorMessage) retour pur interne (uint256) { nécessite(b > 0, message d'erreur); uint256 c = un / b ; // assert(a == b * c + a % b); // Il n'y a aucun cas où cela ne tient pas retour c; } /** * @dev Renvoie le reste de la division de deux entiers non signés. (modulo entier non signé), * Revient lors de la division par zéro. * * Contrepartie de l'opérateur `%` de Solidity. Cette fonction utilise un `revert` * opcode (qui laisse le gaz restant intact) tandis que Solidity utilise un * opcode invalide à annuler (consommant tout le gaz restant). * * Exigences: * * - Le diviseur ne peut pas être zéro. */ fonction mod(uint256 a, uint256 b) retour pur interne (uint256) { return mod(a, b, "SafeMath : modulo par zéro"); } /** * @dev Renvoie le reste de la division de deux entiers non signés. (modulo entier non signé), * Revient avec un message personnalisé lors de la division par zéro. * * Contrepartie de l'opérateur `%` de Solidity. Cette fonction utilise un `revert` * opcode (qui laisse le gaz restant intact) tandis que Solidity utilise un * opcode invalide à annuler (consommant tout le gaz restant). * * Exigences: * * - Le diviseur ne peut pas être zéro. */ function mod(uint256 a, uint256 b, string memory errorMessage) retour pur interne (uint256) { nécessite(b != 0, message d'erreur); renvoie un % b ; } } contexte de contrat abstrait { function _msgSender() retours virtuels de la vue interne (adresse payante) { renvoie msg.expéditeur ; } fonction _msgData() vue interne retours virtuels (mémoire d'octets) { cette; // avertissement de mutabilité d'état silencieux sans générer de bytecode - voir https://github.com/ethereum/solidity/issues/2691 renvoie msg.data ; } } /** * @dev Collection de fonctions liées au type d'adresse */ Adresse de la bibliothèque { /** * @dev Renvoie true si `account` est un contrat. * * [IMPORTANT] * ==== * Il n'est pas sûr de supposer qu'une adresse pour laquelle cette fonction renvoie * false est un compte externe (EOA) et non un contrat. * * Entre autres, `isContract` renverra false pour les éléments suivants * types d'adresses : * * - un compte détenu par un tiers * - un contrat en construction * - une adresse où un contrat sera créé * - une adresse où un contrat a vécu, mais a été détruit * ==== */ function isContract(address account) vue interne renvoie (bool) { // Selon EIP-1052, 0x0 est la valeur renvoyée pour les comptes pas encore créés // et 0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470 est retourné // pour les comptes sans code, c'est-à-dire `keccak256('')` hachage de code bytes32 ; bytes32 accountHash = 0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470; // solhint-disable-next-line no-inline-assembly assembly { codehash := extcodehash(compte) } retour (codehash != accountHash && codehash != 0x0); } /** * @dev Remplacement pour le "transfert" de Solidity : envoie le "montant" wei à * `destinataire`, transmettant tout le gaz disponible et annulant les erreurs. * * https://eips.ethereum.org/EIPS/eip-1884[EIP1884] augmente le coût du gaz * de certains opcodes, faisant éventuellement passer les contrats au-delà de la limite de 2300 gaz * imposé par "transfert", les rendant incapables de recevoir des fonds via * 'transfert'. {sendValue} supprime cette limitation. * * https://diligence.consensys.net/posts/2019/09/stop-using-soliditys-transfer-now/[En savoir plus]. * * IMPORTANT : étant donné que le contrôle est transféré au "destinataire", des précautions doivent être prises * prises pour ne pas créer de vulnérabilités de réentrance. Pensez à utiliser * {ReentrancyGuard} ou le * https://solidity.readthedocs.io/en/v0.5.11/security-considerations.html#use-the-checks-effects-int
